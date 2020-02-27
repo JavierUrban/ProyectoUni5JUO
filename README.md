@@ -9,7 +9,7 @@ En este proyecto se presentan como descargar y realizar análisis básicos de fi
 ## Descarga de secuencias y transformación de archivos 
 
 En el directorio bin se encuentra un script para poder descarga los datos correctamente usando el comando `wget` auuque también se puede usar: `curl`
-Aquí se descargan a un directorio llamado **data** - para usar los datos desde aqui recurda descomprimir con `unzip` 
+Aquí se descargan a un directorio llamado **data** (para usar los datos desde aqui recurda descomprimir con `unzip`) 
 desde el directorio **bin** se recomienda tener cuidado al copiar pues se utilizan rutas realativas
 
 El analisis de los datos se realizon utilizando **VCFtools**  
