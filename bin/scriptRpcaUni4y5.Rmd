@@ -1,0 +1,55 @@
+---
+title: "PCA Unidad 5"
+output:
+  html_document:
+    df_print: paged
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+Instalar y cargar los paquetes vcFR y pcadapt 
+
+```{r}
+library(pcadapt)
+library(vcfR)
+library(adegenet)
+library(ape)
+library(RColorBrewer)
+library(poppr)
+```
+
+Cargar archivo wolves.vcf y crear archivo de genotipos para PCA
+```{r}
+wolvesgenoty <- read.pcadapt("wolves.vcf", type = "vcf")
+```
+
+Agregar datos del nombre de las poblaciones al archivo de genotipos para pca 
+Los datos AllSamples se deben estar en la carpeta donde estan los datos wolves.vcf
+Gráfica de K (porcentajede variación explicado por cada PCA). 
+```{r}
+pop.data <- read.table("AllSamples_n107.txt", sep = "\t", header = TRUE)
+popdatass <- read.pcadapt("AllSamples_n107.txt", type = "pool")
+##Hacer un archivo con genotipos y los nombres de las poblaciones 
+gl.wolves <- vcfR2genlight(wolvesVCFR)
+pop(gl.wolves) <- pop.data$Ecotype
+x <- pcadapt(input = wolvesgenoty, K = 10)
+plot(x, option = "screeplot", K = 10)
+```
+
+Gráfica de PCA por poblaciones utilizando el PC1 y PC2 
+```{r}
+plot(x, option = "scores", pop = pop.data$Ecotype)
+```
+
+Gráfica de Manhattan muestra \ (- \ text {log} _ {10} \) de los valores p.
+Y gráfica para verificar la distribución de los valores p en un gráfico QQ 
+```{r}
+plot(x , option = "manhattan")
+plot(x, option = "qqplot", threshold = 0.1)
+```
+
+
+
+
